@@ -87,11 +87,12 @@
             this.gridView = new System.Windows.Forms.DataGridView();
             this.txtPesquisar = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.image = new System.Windows.Forms.PictureBox();
             this.label27 = new System.Windows.Forms.Label();
+            this.btnImg = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.image)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -299,6 +300,7 @@
             // 
             // txtNomeAtleta
             // 
+            this.txtNomeAtleta.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtNomeAtleta.Enabled = false;
             this.txtNomeAtleta.Font = new System.Drawing.Font("Candara", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNomeAtleta.Location = new System.Drawing.Point(311, 112);
@@ -308,6 +310,7 @@
             // 
             // txtNomeRes
             // 
+            this.txtNomeRes.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtNomeRes.Enabled = false;
             this.txtNomeRes.Font = new System.Drawing.Font("Candara", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNomeRes.Location = new System.Drawing.Point(739, 112);
@@ -317,6 +320,7 @@
             // 
             // txtMoradaAtleta
             // 
+            this.txtMoradaAtleta.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtMoradaAtleta.Enabled = false;
             this.txtMoradaAtleta.Font = new System.Drawing.Font("Candara", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMoradaAtleta.Location = new System.Drawing.Point(311, 259);
@@ -327,6 +331,7 @@
             // 
             // txtMoradaRes
             // 
+            this.txtMoradaRes.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtMoradaRes.Enabled = false;
             this.txtMoradaRes.Font = new System.Drawing.Font("Candara", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMoradaRes.Location = new System.Drawing.Point(739, 258);
@@ -379,21 +384,27 @@
             // 
             // txtEmail1
             // 
+            this.txtEmail1.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
             this.txtEmail1.Enabled = false;
             this.txtEmail1.Font = new System.Drawing.Font("Candara", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEmail1.Location = new System.Drawing.Point(739, 169);
             this.txtEmail1.Name = "txtEmail1";
             this.txtEmail1.Size = new System.Drawing.Size(317, 26);
             this.txtEmail1.TabIndex = 14;
+            this.txtEmail1.Tag = "";
+            this.txtEmail1.Text = "@";
             // 
             // txtEmail2
             // 
+            this.txtEmail2.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
             this.txtEmail2.Enabled = false;
             this.txtEmail2.Font = new System.Drawing.Font("Candara", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEmail2.Location = new System.Drawing.Point(739, 198);
             this.txtEmail2.Name = "txtEmail2";
             this.txtEmail2.Size = new System.Drawing.Size(317, 26);
             this.txtEmail2.TabIndex = 15;
+            this.txtEmail2.Tag = "";
+            this.txtEmail2.Text = "@";
             // 
             // txtDataEntrada
             // 
@@ -408,6 +419,7 @@
             // 
             // txtExame
             // 
+            this.txtExame.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtExame.Enabled = false;
             this.txtExame.Font = new System.Drawing.Font("Candara", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtExame.FormattingEnabled = true;
@@ -422,10 +434,10 @@
             // btnNovo
             // 
             this.btnNovo.Font = new System.Drawing.Font("Candara", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNovo.Location = new System.Drawing.Point(12, 253);
+            this.btnNovo.Location = new System.Drawing.Point(12, 281);
             this.btnNovo.Name = "btnNovo";
             this.btnNovo.Size = new System.Drawing.Size(112, 23);
-            this.btnNovo.TabIndex = 22;
+            this.btnNovo.TabIndex = 23;
             this.btnNovo.Text = "Novo";
             this.btnNovo.UseVisualStyleBackColor = true;
             this.btnNovo.Click += new System.EventHandler(this.btnNovo_Click);
@@ -434,10 +446,10 @@
             // 
             this.btnGravar.Enabled = false;
             this.btnGravar.Font = new System.Drawing.Font("Candara", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGravar.Location = new System.Drawing.Point(12, 282);
+            this.btnGravar.Location = new System.Drawing.Point(12, 310);
             this.btnGravar.Name = "btnGravar";
             this.btnGravar.Size = new System.Drawing.Size(112, 23);
-            this.btnGravar.TabIndex = 23;
+            this.btnGravar.TabIndex = 24;
             this.btnGravar.Text = "Gravar";
             this.btnGravar.UseVisualStyleBackColor = true;
             this.btnGravar.Click += new System.EventHandler(this.btnGravar_Click);
@@ -446,10 +458,10 @@
             // 
             this.btnEditar.Enabled = false;
             this.btnEditar.Font = new System.Drawing.Font("Candara", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditar.Location = new System.Drawing.Point(12, 311);
+            this.btnEditar.Location = new System.Drawing.Point(12, 339);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(112, 23);
-            this.btnEditar.TabIndex = 24;
+            this.btnEditar.TabIndex = 25;
             this.btnEditar.Text = "Editar";
             this.btnEditar.UseVisualStyleBackColor = true;
             this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
@@ -458,10 +470,10 @@
             // 
             this.btnApagar.Enabled = false;
             this.btnApagar.Font = new System.Drawing.Font("Candara", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnApagar.Location = new System.Drawing.Point(12, 340);
+            this.btnApagar.Location = new System.Drawing.Point(12, 368);
             this.btnApagar.Name = "btnApagar";
             this.btnApagar.Size = new System.Drawing.Size(112, 23);
-            this.btnApagar.TabIndex = 25;
+            this.btnApagar.TabIndex = 26;
             this.btnApagar.Text = "Apagar";
             this.btnApagar.UseVisualStyleBackColor = true;
             this.btnApagar.Click += new System.EventHandler(this.btnApagar_Click);
@@ -470,10 +482,10 @@
             // 
             this.btnCancelar.Enabled = false;
             this.btnCancelar.Font = new System.Drawing.Font("Candara", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelar.Location = new System.Drawing.Point(12, 369);
+            this.btnCancelar.Location = new System.Drawing.Point(12, 397);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(112, 23);
-            this.btnCancelar.TabIndex = 26;
+            this.btnCancelar.TabIndex = 27;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -481,12 +493,13 @@
             // btnPesquisar
             // 
             this.btnPesquisar.Font = new System.Drawing.Font("Candara", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPesquisar.Location = new System.Drawing.Point(194, 517);
+            this.btnPesquisar.Location = new System.Drawing.Point(194, 516);
             this.btnPesquisar.Name = "btnPesquisar";
-            this.btnPesquisar.Size = new System.Drawing.Size(112, 36);
-            this.btnPesquisar.TabIndex = 28;
-            this.btnPesquisar.Text = "Pesquisar";
+            this.btnPesquisar.Size = new System.Drawing.Size(112, 37);
+            this.btnPesquisar.TabIndex = 29;
+            this.btnPesquisar.Text = "Limpar";
             this.btnPesquisar.UseVisualStyleBackColor = true;
+            this.btnPesquisar.Click += new System.EventHandler(this.btnPesquisar_Click);
             // 
             // label21
             // 
@@ -526,6 +539,7 @@
             // 
             // txtEquipamento
             // 
+            this.txtEquipamento.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtEquipamento.Enabled = false;
             this.txtEquipamento.Font = new System.Drawing.Font("Candara", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEquipamento.Location = new System.Drawing.Point(444, 374);
@@ -545,6 +559,7 @@
             // 
             // txtBoxReinscricao
             // 
+            this.txtBoxReinscricao.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtBoxReinscricao.Enabled = false;
             this.txtBoxReinscricao.Font = new System.Drawing.Font("Candara", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxReinscricao.FormattingEnabled = true;
@@ -649,15 +664,17 @@
             this.gridView.Name = "gridView";
             this.gridView.ReadOnly = true;
             this.gridView.Size = new System.Drawing.Size(745, 92);
-            this.gridView.TabIndex = 37;
+            this.gridView.TabIndex = 30;
             this.gridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridView_CellContentClick);
             // 
             // txtPesquisar
             // 
+            this.txtPesquisar.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtPesquisar.Location = new System.Drawing.Point(195, 487);
             this.txtPesquisar.Name = "txtPesquisar";
             this.txtPesquisar.Size = new System.Drawing.Size(111, 23);
-            this.txtPesquisar.TabIndex = 27;
+            this.txtPesquisar.TabIndex = 28;
+            this.txtPesquisar.TextChanged += new System.EventHandler(this.txtPesquisar_TextChanged);
             // 
             // label26
             // 
@@ -669,23 +686,36 @@
             this.label26.TabIndex = 39;
             this.label26.Text = "Pesquisar dados:";
             // 
-            // pictureBox2
+            // image
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(12, 115);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(112, 133);
-            this.pictureBox2.TabIndex = 40;
-            this.pictureBox2.TabStop = false;
+            this.image.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.image.Location = new System.Drawing.Point(13, 103);
+            this.image.Name = "image";
+            this.image.Size = new System.Drawing.Size(112, 133);
+            this.image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.image.TabIndex = 40;
+            this.image.TabStop = false;
             // 
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Font = new System.Drawing.Font("Candara", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label27.Location = new System.Drawing.Point(39, 99);
+            this.label27.Font = new System.Drawing.Font("Candara", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.Location = new System.Drawing.Point(12, 103);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(57, 13);
+            this.label27.Size = new System.Drawing.Size(19, 10);
             this.label27.TabIndex = 41;
-            this.label27.Text = "Foto atleta";
+            this.label27.Text = "SRA";
+            // 
+            // btnImg
+            // 
+            this.btnImg.Font = new System.Drawing.Font("Candara", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnImg.Location = new System.Drawing.Point(12, 252);
+            this.btnImg.Name = "btnImg";
+            this.btnImg.Size = new System.Drawing.Size(112, 23);
+            this.btnImg.TabIndex = 22;
+            this.btnImg.Text = "Editar foto";
+            this.btnImg.UseVisualStyleBackColor = true;
+            this.btnImg.Click += new System.EventHandler(this.btnImg_Click);
             // 
             // frmPrincipal
             // 
@@ -693,8 +723,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGray;
             this.ClientSize = new System.Drawing.Size(1063, 565);
+            this.Controls.Add(this.btnImg);
             this.Controls.Add(this.label27);
-            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.image);
             this.Controls.Add(this.label26);
             this.Controls.Add(this.txtPesquisar);
             this.Controls.Add(this.gridView);
@@ -763,7 +794,7 @@
             this.Load += new System.EventHandler(this.frmPrincipal_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.image)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -829,8 +860,9 @@
         private System.Windows.Forms.DataGridView gridView;
         private System.Windows.Forms.TextBox txtPesquisar;
         private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox image;
         private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Button btnImg;
     }
 }
 

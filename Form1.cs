@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.IO;
 
 namespace SRA
 {
@@ -19,6 +20,7 @@ namespace SRA
         String sql;
         MySqlCommand cmd;
         String idescolas;
+        String foto;
 
         public frmPrincipal()
         {
@@ -50,13 +52,33 @@ namespace SRA
             gridView.Columns[20].HeaderText = "EMAIL2";
             gridView.Columns[21].HeaderText = "EQUIPAMENTO";
             gridView.Columns[22].HeaderText = "INSCRICAO";
+            gridView.Columns[23].HeaderText = "FOTO";
+            // ocultar estes grids abaixo no gridView
             gridView.Columns[0].Visible = false;
+            gridView.Columns[23].Visible = false;
+            gridView.Columns[6].Visible = false;
+            gridView.Columns[7].Visible = false;
+            gridView.Columns[8].Visible = false;
+            gridView.Columns[9].Visible = false;
+            gridView.Columns[10].Visible = false;
+            gridView.Columns[11].Visible = false;
+            gridView.Columns[12].Visible = false;
+            gridView.Columns[13].Visible = false;
+            gridView.Columns[14].Visible = false;
+            gridView.Columns[15].Visible = false;
+            gridView.Columns[16].Visible = false;
+            gridView.Columns[17].Visible = false;
+            gridView.Columns[18].Visible = false;
+            gridView.Columns[19].Visible = false;
+            gridView.Columns[20].Visible = false;
+            gridView.Columns[21].Visible = false;
+
         }
 
         private void frmPrincipal_Load(object sender, EventArgs e)
         {
             // carrega tudo ao abrir
-           listargridView();
+            listargridView();
         }
 
         private void listargridView()
@@ -124,6 +146,7 @@ namespace SRA
             txtEquipamento.Text = string.Empty;
             txtNumInscricao.Text = string.Empty;
         }
+        // método para ativar campos
         private void ativarCampos()
         {
             txtNomeAtleta.Enabled=true;
@@ -149,6 +172,7 @@ namespace SRA
             txtBiRes.Enabled = true;
             txtEquipamento.Enabled = true;
         }
+        // método para desativar campos
         private void desativarCampos()
         {
             txtNomeAtleta.Enabled = false;
@@ -174,6 +198,23 @@ namespace SRA
             txtBiRes.Enabled = false;
             txtEquipamento.Enabled = false;
         }
+        // método para pesquisar nome
+        private void pesquisarNome()
+        {
+            conetar.abrirConexao();
+            sql = "SELECT * FROM escolasfutebol WHERE nomeatleta LIKE @nomeatleta ORDER BY nomeatleta ASC";
+            cmd = new MySqlCommand(sql, conetar.con);
+            cmd.Parameters.AddWithValue("@nomeatleta", txtPesquisar.Text + "%");
+            conetar.fecharConexao();
+            MySqlDataAdapter data = new MySqlDataAdapter();
+            data.SelectCommand = cmd;
+            DataTable dt = new DataTable();
+            data.Fill(dt);
+            gridView.DataSource = dt;
+            conetar.fecharConexao();
+            formatargridView();
+
+        }
 
         private void btnNovo_Click(object sender, EventArgs e)
         {
@@ -186,7 +227,6 @@ namespace SRA
             btnEditar.Enabled=false;
             txtPesquisar.Enabled=false;
             btnPesquisar.Enabled =false;
-            gridView.Enabled=false;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -203,21 +243,30 @@ namespace SRA
         {
             if (txtNomeAtleta.Text.ToString().Trim() == "")
             {
-                MessageBox.Show("Digite o nome do atleta");
+                MessageBox.Show("Digite o nome do atleta", "Gravar dados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtNomeAtleta.Text = "";
+                txtNomeAtleta.Focus();
+                return;                
+            }
+
+            if (txtNomeAtleta.Text.ToString().Length < 10)
+            {
+                MessageBox.Show("[ERRO] => nome demasiado curto!");
                 txtNomeAtleta.Text = "";
                 txtNomeAtleta.Focus();
                 return;
             }
+
             if (txtNifAtleta.Text.Trim() == "")
             {
-                MessageBox.Show("Digite o Nif do atleta");
+                MessageBox.Show("Digite o NIF do atleta", "Gravar dados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtNifAtleta.Text = "";
                 txtNifAtleta.Focus();
                 return;
             }
             if (txtBiAtleta.Text.Trim() == "")
             {
-                MessageBox.Show("Digite o BI/CC do atleta");
+                MessageBox.Show("Digite o nº BI/CC do atleta", "Gravar dados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtBiAtleta.Text = "";
                 txtBiAtleta.Focus();    
                 return;
@@ -232,7 +281,7 @@ namespace SRA
 
             // inserir dados na tabela
             conetar.abrirConexao();
-            sql = "INSERT INTO escolasfutebol (dataentrada, reinscricao, numsocioatleta, examemedico, nomeatleta, telefoneatleta, biccatleta, nifatleta, datanasciatleta, mensalidade, nomeres, moradaatleta, moradares, telefoneres, numsociores, biccres, nifres, datanascires, email1, email2, equipamento, inscricao) VALUES (@dataentrada, @reinscricao, @numsocioatleta, @examemedico, @nomeatleta, @telefoneatleta, @biccatleta, @nifatleta, @datanasciatleta, @mensalidade, @nomeres, @moradaatleta, @moradares, @telefoneres, @numsociores, @biccres, @nifres, @datanascires, @email1, @email2, @equipamento, @inscricao)";
+            sql = "INSERT INTO escolasfutebol (dataentrada, reinscricao, numsocioatleta, examemedico, nomeatleta, telefoneatleta, biccatleta, nifatleta, datanasciatleta, mensalidade, nomeres, moradaatleta, moradares, telefoneres, numsociores, biccres, nifres, datanascires, email1, email2, equipamento, inscricao, fotoatleta) VALUES (@dataentrada, @reinscricao, @numsocioatleta, @examemedico, @nomeatleta, @telefoneatleta, @biccatleta, @nifatleta, @datanasciatleta, @mensalidade, @nomeres, @moradaatleta, @moradares, @telefoneres, @numsociores, @biccres, @nifres, @datanascires, @email1, @email2, @equipamento, @inscricao, @fotoatleta)";
             cmd = new MySqlCommand (sql, conetar.con);
             cmd.Parameters.AddWithValue("@dataentrada", txtDataEntrada.Text);
             cmd.Parameters.AddWithValue("@reinscricao", txtBoxReinscricao.Text);
@@ -256,6 +305,7 @@ namespace SRA
             cmd.Parameters.AddWithValue("@email2", txtEmail2.Text);
             cmd.Parameters.AddWithValue("@equipamento", txtEquipamento.Text);
             cmd.Parameters.AddWithValue("@inscricao", txtNumInscricao.Text);
+            cmd.Parameters.AddWithValue("@fotoatleta", img()); // método img()
 
             cmd.ExecuteNonQuery();
             conetar.fecharConexao();
@@ -263,18 +313,37 @@ namespace SRA
             limparDados();
             desativarCampos();
             btnNovo.Enabled = true;
+            btnPesquisar.Enabled = true;
+            txtPesquisar.Enabled = true;
             MessageBox.Show("Dados gravados com sucesso!","Registo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             listargridView();
+            gridView.Enabled = true;
         }
 
         private void btnApagar_Click(object sender, EventArgs e)
         {
-            desativarBotoes();
-            limparDados();
-            desativarCampos();
-            btnNovo.Enabled = true;
-            MessageBox.Show("Deseja apagar este registo?","Apagar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            listargridView();
+            var resposta = MessageBox.Show("Deseja apagar este registo?", "Apagar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (resposta == DialogResult.Yes)
+            {
+
+                conetar.abrirConexao();
+                sql = "DELETE FROM escolasfutebol WHERE idescolas=@idescolas";
+                cmd = new MySqlCommand(sql, conetar.con);
+                cmd.Parameters.AddWithValue("@idescolas", idescolas);
+                cmd.ExecuteNonQuery();
+                conetar.fecharConexao();
+                desativarBotoes();
+                limparDados();
+                desativarCampos();
+                btnNovo.Enabled = true;
+                btnPesquisar.Enabled = true;
+                listargridView();
+                MessageBox.Show("Dados apagados com sucesso!", "Apagar registo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+
+
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
@@ -323,7 +392,7 @@ namespace SRA
             btnNovo.Enabled=false;
             btnGravar.Enabled=false;
             ativarCampos();
-
+            txtPesquisar.Enabled = true;
             idescolas = gridView.CurrentRow.Cells[0].Value.ToString();
 
             txtNomeAtleta.Text = gridView.CurrentRow.Cells[1].Value.ToString();
@@ -348,6 +417,49 @@ namespace SRA
             txtEmail2.Text = gridView.CurrentRow.Cells[20].Value.ToString();
             txtEquipamento.Text = gridView.CurrentRow.Cells[21].Value.ToString();
             txtNumInscricao.Text = gridView.CurrentRow.Cells[22].Value.ToString();
+        }
+
+
+
+        private void txtPesquisar_TextChanged(object sender, EventArgs e)
+        {
+            pesquisarNome();
+        }
+
+        private void btnPesquisar_Click(object sender, EventArgs e)
+        {
+            txtPesquisar.Text = "";
+        }
+
+        private void btnImg_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Fotos(*.jpg; *.jpeg; *.png) | *.jpg; *.jpeg; *.png;"; // carregar os tipos de ficheiro
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                // pega o caminho da imagen selecionada e joga no imgage
+                foto = dialog.FileName.ToString();
+                image.ImageLocation = foto;
+            }
+        }
+
+        private byte [] img()
+        {
+            byte[] imagem_byte = null;
+            if (foto == "")
+            {
+                return null;
+            }
+            FileStream fs = new FileStream(foto, FileMode.Open, FileAccess.Read);
+            BinaryReader br = new BinaryReader(fs);
+            imagem_byte = br.ReadBytes((int)fs.Length);
+            return imagem_byte;
+        }
+
+        // método limpar foto
+        private void limparFoto()
+        {
+
         }
     }
 }
