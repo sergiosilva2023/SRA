@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPrincipal));
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblNome = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -87,23 +86,16 @@
             this.gridView = new System.Windows.Forms.DataGridView();
             this.txtPesquisar = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
-            this.image = new System.Windows.Forms.PictureBox();
             this.label27 = new System.Windows.Forms.Label();
             this.btnImg = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.txtNovaInscricao = new System.Windows.Forms.ComboBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.image = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.image)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::SRA.Properties.Resources.logo;
-            this.pictureBox1.Location = new System.Drawing.Point(13, 13);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(63, 73);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
             // 
             // lblNome
             // 
@@ -126,10 +118,10 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Candara", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(83, 13);
+            this.label2.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(12, 9);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(271, 23);
+            this.label2.Size = new System.Drawing.Size(230, 19);
             this.label2.TabIndex = 3;
             this.label2.Text = "Sociedade Recreativa Atalaiense";
             // 
@@ -137,7 +129,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Candara", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(140, 36);
+            this.label3.Location = new System.Drawing.Point(59, 28);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(116, 18);
             this.label3.TabIndex = 4;
@@ -191,7 +183,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(213, 314);
+            this.label9.Location = new System.Drawing.Point(450, 433);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(92, 15);
             this.label9.TabIndex = 10;
@@ -218,7 +210,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(181, 341);
+            this.label12.Location = new System.Drawing.Point(181, 342);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(124, 15);
             this.label12.TabIndex = 13;
@@ -236,7 +228,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(184, 372);
+            this.label14.Location = new System.Drawing.Point(187, 314);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(119, 15);
             this.label14.TabIndex = 15;
@@ -316,7 +308,7 @@
             this.txtNomeRes.Location = new System.Drawing.Point(739, 112);
             this.txtNomeRes.Name = "txtNomeRes";
             this.txtNomeRes.Size = new System.Drawing.Size(317, 26);
-            this.txtNomeRes.TabIndex = 12;
+            this.txtNomeRes.TabIndex = 13;
             // 
             // txtMoradaAtleta
             // 
@@ -338,17 +330,17 @@
             this.txtMoradaRes.Multiline = true;
             this.txtMoradaRes.Name = "txtMoradaRes";
             this.txtMoradaRes.Size = new System.Drawing.Size(317, 45);
-            this.txtMoradaRes.TabIndex = 17;
+            this.txtMoradaRes.TabIndex = 18;
             // 
             // txtNasciAtleta
             // 
             this.txtNasciAtleta.Enabled = false;
             this.txtNasciAtleta.Font = new System.Drawing.Font("Candara", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNasciAtleta.Location = new System.Drawing.Point(311, 368);
+            this.txtNasciAtleta.Location = new System.Drawing.Point(311, 310);
             this.txtNasciAtleta.Mask = "00/00/0000";
             this.txtNasciAtleta.Name = "txtNasciAtleta";
             this.txtNasciAtleta.Size = new System.Drawing.Size(100, 26);
-            this.txtNasciAtleta.TabIndex = 10;
+            this.txtNasciAtleta.TabIndex = 8;
             this.txtNasciAtleta.ValidatingType = typeof(System.DateTime);
             // 
             // txtNasciRes
@@ -359,7 +351,7 @@
             this.txtNasciRes.Mask = "00/00/0000";
             this.txtNasciRes.Name = "txtNasciRes";
             this.txtNasciRes.Size = new System.Drawing.Size(81, 26);
-            this.txtNasciRes.TabIndex = 18;
+            this.txtNasciRes.TabIndex = 19;
             this.txtNasciRes.ValidatingType = typeof(System.DateTime);
             // 
             // txtTelAtleta
@@ -370,7 +362,7 @@
             this.txtTelAtleta.Mask = "000-000-000";
             this.txtTelAtleta.Name = "txtTelAtleta";
             this.txtTelAtleta.Size = new System.Drawing.Size(123, 26);
-            this.txtTelAtleta.TabIndex = 5;
+            this.txtTelAtleta.TabIndex = 6;
             // 
             // txtTelRes
             // 
@@ -380,7 +372,7 @@
             this.txtTelRes.Mask = "000-000-000";
             this.txtTelRes.Name = "txtTelRes";
             this.txtTelRes.Size = new System.Drawing.Size(123, 26);
-            this.txtTelRes.TabIndex = 13;
+            this.txtTelRes.TabIndex = 14;
             // 
             // txtEmail1
             // 
@@ -390,7 +382,7 @@
             this.txtEmail1.Location = new System.Drawing.Point(739, 169);
             this.txtEmail1.Name = "txtEmail1";
             this.txtEmail1.Size = new System.Drawing.Size(317, 26);
-            this.txtEmail1.TabIndex = 14;
+            this.txtEmail1.TabIndex = 15;
             this.txtEmail1.Tag = "";
             this.txtEmail1.Text = "@";
             // 
@@ -402,7 +394,7 @@
             this.txtEmail2.Location = new System.Drawing.Point(739, 198);
             this.txtEmail2.Name = "txtEmail2";
             this.txtEmail2.Size = new System.Drawing.Size(317, 26);
-            this.txtEmail2.TabIndex = 15;
+            this.txtEmail2.TabIndex = 16;
             this.txtEmail2.Tag = "";
             this.txtEmail2.Text = "@";
             // 
@@ -426,15 +418,15 @@
             this.txtExame.Items.AddRange(new object[] {
             "SIM",
             "NÃO"});
-            this.txtExame.Location = new System.Drawing.Point(311, 310);
+            this.txtExame.Location = new System.Drawing.Point(548, 429);
             this.txtExame.Name = "txtExame";
             this.txtExame.Size = new System.Drawing.Size(100, 26);
-            this.txtExame.TabIndex = 8;
+            this.txtExame.TabIndex = 23;
             // 
             // btnNovo
             // 
             this.btnNovo.Font = new System.Drawing.Font("Candara", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNovo.Location = new System.Drawing.Point(12, 281);
+            this.btnNovo.Location = new System.Drawing.Point(17, 374);
             this.btnNovo.Name = "btnNovo";
             this.btnNovo.Size = new System.Drawing.Size(112, 23);
             this.btnNovo.TabIndex = 23;
@@ -446,7 +438,7 @@
             // 
             this.btnGravar.Enabled = false;
             this.btnGravar.Font = new System.Drawing.Font("Candara", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGravar.Location = new System.Drawing.Point(12, 310);
+            this.btnGravar.Location = new System.Drawing.Point(17, 403);
             this.btnGravar.Name = "btnGravar";
             this.btnGravar.Size = new System.Drawing.Size(112, 23);
             this.btnGravar.TabIndex = 24;
@@ -458,7 +450,7 @@
             // 
             this.btnEditar.Enabled = false;
             this.btnEditar.Font = new System.Drawing.Font("Candara", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditar.Location = new System.Drawing.Point(12, 339);
+            this.btnEditar.Location = new System.Drawing.Point(17, 432);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(112, 23);
             this.btnEditar.TabIndex = 25;
@@ -470,7 +462,7 @@
             // 
             this.btnApagar.Enabled = false;
             this.btnApagar.Font = new System.Drawing.Font("Candara", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnApagar.Location = new System.Drawing.Point(12, 368);
+            this.btnApagar.Location = new System.Drawing.Point(17, 461);
             this.btnApagar.Name = "btnApagar";
             this.btnApagar.Size = new System.Drawing.Size(112, 23);
             this.btnApagar.TabIndex = 26;
@@ -482,7 +474,7 @@
             // 
             this.btnCancelar.Enabled = false;
             this.btnCancelar.Font = new System.Drawing.Font("Candara", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelar.Location = new System.Drawing.Point(12, 397);
+            this.btnCancelar.Location = new System.Drawing.Point(17, 490);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(112, 23);
             this.btnCancelar.TabIndex = 27;
@@ -513,7 +505,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(224, 400);
+            this.label22.Location = new System.Drawing.Point(226, 370);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(79, 15);
             this.label22.TabIndex = 31;
@@ -542,16 +534,16 @@
             this.txtEquipamento.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtEquipamento.Enabled = false;
             this.txtEquipamento.Font = new System.Drawing.Font("Candara", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEquipamento.Location = new System.Drawing.Point(444, 374);
+            this.txtEquipamento.Location = new System.Drawing.Point(669, 374);
             this.txtEquipamento.Multiline = true;
             this.txtEquipamento.Name = "txtEquipamento";
-            this.txtEquipamento.Size = new System.Drawing.Size(612, 81);
-            this.txtEquipamento.TabIndex = 21;
+            this.txtEquipamento.Size = new System.Drawing.Size(387, 81);
+            this.txtEquipamento.TabIndex = 22;
             // 
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(441, 353);
+            this.label25.Location = new System.Drawing.Point(666, 350);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(84, 15);
             this.label25.TabIndex = 36;
@@ -601,13 +593,13 @@
             this.txtSocioAtleta.Mask = "0000-000";
             this.txtSocioAtleta.Name = "txtSocioAtleta";
             this.txtSocioAtleta.Size = new System.Drawing.Size(81, 26);
-            this.txtSocioAtleta.TabIndex = 6;
+            this.txtSocioAtleta.TabIndex = 5;
             // 
             // txtNumInscricao
             // 
             this.txtNumInscricao.Enabled = false;
             this.txtNumInscricao.Font = new System.Drawing.Font("Candara", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNumInscricao.Location = new System.Drawing.Point(311, 339);
+            this.txtNumInscricao.Location = new System.Drawing.Point(311, 338);
             this.txtNumInscricao.Mask = "000";
             this.txtNumInscricao.Name = "txtNumInscricao";
             this.txtNumInscricao.Size = new System.Drawing.Size(100, 26);
@@ -617,11 +609,11 @@
             // 
             this.txtMensalidade.Enabled = false;
             this.txtMensalidade.Font = new System.Drawing.Font("Candara", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMensalidade.Location = new System.Drawing.Point(311, 397);
+            this.txtMensalidade.Location = new System.Drawing.Point(311, 367);
             this.txtMensalidade.Mask = "00€";
             this.txtMensalidade.Name = "txtMensalidade";
             this.txtMensalidade.Size = new System.Drawing.Size(100, 26);
-            this.txtMensalidade.TabIndex = 11;
+            this.txtMensalidade.TabIndex = 10;
             // 
             // txtSocioRes
             // 
@@ -631,7 +623,7 @@
             this.txtSocioRes.Mask = "0000-000";
             this.txtSocioRes.Name = "txtSocioRes";
             this.txtSocioRes.Size = new System.Drawing.Size(100, 26);
-            this.txtSocioRes.TabIndex = 16;
+            this.txtSocioRes.TabIndex = 17;
             // 
             // txtBiRes
             // 
@@ -641,7 +633,7 @@
             this.txtBiRes.Mask = "000000000";
             this.txtBiRes.Name = "txtBiRes";
             this.txtBiRes.Size = new System.Drawing.Size(180, 26);
-            this.txtBiRes.TabIndex = 19;
+            this.txtBiRes.TabIndex = 20;
             // 
             // txtNifRes
             // 
@@ -651,7 +643,7 @@
             this.txtNifRes.Mask = "000000000";
             this.txtNifRes.Name = "txtNifRes";
             this.txtNifRes.Size = new System.Drawing.Size(180, 26);
-            this.txtNifRes.TabIndex = 20;
+            this.txtNifRes.TabIndex = 21;
             // 
             // gridView
             // 
@@ -686,21 +678,11 @@
             this.label26.TabIndex = 39;
             this.label26.Text = "Pesquisar dados:";
             // 
-            // image
-            // 
-            this.image.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.image.Location = new System.Drawing.Point(13, 103);
-            this.image.Name = "image";
-            this.image.Size = new System.Drawing.Size(112, 133);
-            this.image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.image.TabIndex = 40;
-            this.image.TabStop = false;
-            // 
             // label27
             // 
             this.label27.AutoSize = true;
             this.label27.Font = new System.Drawing.Font("Candara", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label27.Location = new System.Drawing.Point(12, 103);
+            this.label27.Location = new System.Drawing.Point(17, 196);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(19, 10);
             this.label27.TabIndex = 41;
@@ -709,13 +691,57 @@
             // btnImg
             // 
             this.btnImg.Font = new System.Drawing.Font("Candara", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnImg.Location = new System.Drawing.Point(12, 252);
+            this.btnImg.Location = new System.Drawing.Point(17, 345);
             this.btnImg.Name = "btnImg";
             this.btnImg.Size = new System.Drawing.Size(112, 23);
-            this.btnImg.TabIndex = 22;
+            this.btnImg.TabIndex = 30;
             this.btnImg.Text = "Editar foto";
             this.btnImg.UseVisualStyleBackColor = true;
             this.btnImg.Click += new System.EventHandler(this.btnImg_Click);
+            // 
+            // txtNovaInscricao
+            // 
+            this.txtNovaInscricao.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.txtNovaInscricao.Font = new System.Drawing.Font("Candara", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNovaInscricao.FormattingEnabled = true;
+            this.txtNovaInscricao.Items.AddRange(new object[] {
+            "15.00€",
+            "20.00€",
+            "25.00€",
+            "30.00€"});
+            this.txtNovaInscricao.Location = new System.Drawing.Point(311, 398);
+            this.txtNovaInscricao.Name = "txtNovaInscricao";
+            this.txtNovaInscricao.Size = new System.Drawing.Size(100, 26);
+            this.txtNovaInscricao.TabIndex = 11;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(230, 401);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(59, 15);
+            this.label28.TabIndex = 43;
+            this.label28.Text = "Inscrição:";
+            // 
+            // image
+            // 
+            this.image.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.image.ErrorImage = null;
+            this.image.Location = new System.Drawing.Point(18, 196);
+            this.image.Name = "image";
+            this.image.Size = new System.Drawing.Size(112, 133);
+            this.image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.image.TabIndex = 40;
+            this.image.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(87, 49);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(59, 82);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
             // frmPrincipal
             // 
@@ -723,6 +749,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGray;
             this.ClientSize = new System.Drawing.Size(1063, 565);
+            this.Controls.Add(this.label28);
+            this.Controls.Add(this.txtNovaInscricao);
             this.Controls.Add(this.btnImg);
             this.Controls.Add(this.label27);
             this.Controls.Add(this.image);
@@ -792,9 +820,9 @@
             this.Text = "Principal";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmPrincipal_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.image)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -863,6 +891,8 @@
         private System.Windows.Forms.PictureBox image;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Button btnImg;
+        private System.Windows.Forms.ComboBox txtNovaInscricao;
+        private System.Windows.Forms.Label label28;
     }
 }
 

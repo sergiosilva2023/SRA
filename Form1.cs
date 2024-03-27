@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.IO;
+using System.Diagnostics;
 
 namespace SRA
 {
@@ -53,6 +54,7 @@ namespace SRA
             gridView.Columns[21].HeaderText = "EQUIPAMENTO";
             gridView.Columns[22].HeaderText = "INSCRICAO";
             gridView.Columns[23].HeaderText = "FOTO";
+            gridView.Columns[24].HeaderText = "NOVAINSCRICAO";
             // ocultar estes grids abaixo no gridView
             gridView.Columns[0].Visible = false;
             gridView.Columns[23].Visible = false;
@@ -72,12 +74,14 @@ namespace SRA
             gridView.Columns[19].Visible = false;
             gridView.Columns[20].Visible = false;
             gridView.Columns[21].Visible = false;
+            gridView.Columns[24].Visible = false;
 
         }
 
         private void frmPrincipal_Load(object sender, EventArgs e)
         {
             // carrega tudo ao abrir
+            limparFoto();
             listargridView();
         }
 
@@ -171,6 +175,7 @@ namespace SRA
             txtNifRes.Enabled = true;
             txtBiRes.Enabled = true;
             txtEquipamento.Enabled = true;
+            image.Enabled = true;
         }
         // método para desativar campos
         private void desativarCampos()
@@ -220,13 +225,12 @@ namespace SRA
         {
             ativarBotoes();
             limparDados();
+            limparFoto();
             ativarCampos();
             txtNomeAtleta.Focus();
             btnNovo.Enabled=false;
             btnApagar.Enabled=false;
             btnEditar.Enabled=false;
-            txtPesquisar.Enabled=false;
-            btnPesquisar.Enabled =false;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -237,6 +241,7 @@ namespace SRA
             btnNovo.Enabled=true;
             txtPesquisar.Enabled = true;
             btnPesquisar.Enabled = true;
+            limparFoto();
         }
 
         private void btnGravar_Click(object sender, EventArgs e)
@@ -281,7 +286,7 @@ namespace SRA
 
             // inserir dados na tabela
             conetar.abrirConexao();
-            sql = "INSERT INTO escolasfutebol (dataentrada, reinscricao, numsocioatleta, examemedico, nomeatleta, telefoneatleta, biccatleta, nifatleta, datanasciatleta, mensalidade, nomeres, moradaatleta, moradares, telefoneres, numsociores, biccres, nifres, datanascires, email1, email2, equipamento, inscricao, fotoatleta) VALUES (@dataentrada, @reinscricao, @numsocioatleta, @examemedico, @nomeatleta, @telefoneatleta, @biccatleta, @nifatleta, @datanasciatleta, @mensalidade, @nomeres, @moradaatleta, @moradares, @telefoneres, @numsociores, @biccres, @nifres, @datanascires, @email1, @email2, @equipamento, @inscricao, @fotoatleta)";
+            sql = "INSERT INTO escolasfutebol (dataentrada, reinscricao, numsocioatleta, examemedico, nomeatleta, telefoneatleta, biccatleta, nifatleta, datanasciatleta, mensalidade, nomeres, moradaatleta, moradares, telefoneres, numsociores, biccres, nifres, datanascires, email1, email2, equipamento, inscricao, fotoatleta, novainscricao) VALUES (@dataentrada, @reinscricao, @numsocioatleta, @examemedico, @nomeatleta, @telefoneatleta, @biccatleta, @nifatleta, @datanasciatleta, @mensalidade, @nomeres, @moradaatleta, @moradares, @telefoneres, @numsociores, @biccres, @nifres, @datanascires, @email1, @email2, @equipamento, @inscricao, @fotoatleta, @novainscricao)";
             cmd = new MySqlCommand (sql, conetar.con);
             cmd.Parameters.AddWithValue("@dataentrada", txtDataEntrada.Text);
             cmd.Parameters.AddWithValue("@reinscricao", txtBoxReinscricao.Text);
@@ -306,6 +311,7 @@ namespace SRA
             cmd.Parameters.AddWithValue("@equipamento", txtEquipamento.Text);
             cmd.Parameters.AddWithValue("@inscricao", txtNumInscricao.Text);
             cmd.Parameters.AddWithValue("@fotoatleta", img()); // método img()
+            cmd.Parameters.AddWithValue("@novainscricao", txtNovaInscricao.Text);
 
             cmd.ExecuteNonQuery();
             conetar.fecharConexao();
@@ -315,7 +321,9 @@ namespace SRA
             btnNovo.Enabled = true;
             btnPesquisar.Enabled = true;
             txtPesquisar.Enabled = true;
+           
             MessageBox.Show("Dados gravados com sucesso!","Registo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            limparFoto();
             listargridView();
             gridView.Enabled = true;
         }
@@ -350,7 +358,7 @@ namespace SRA
         {
 
             conetar.abrirConexao();
-            sql = "UPDATE escolasfutebol SET dataentrada=@dataentrada, reinscricao=@reinscricao, numsocioatleta=@numsocioatleta, examemedico=@examemedico, nomeatleta=@nomeatleta, telefoneatleta=@telefoneatleta, biccatleta=@biccatleta, nifatleta=@nifatleta, datanasciatleta=@datanasciatleta, mensalidade=@mensalidade, nomeres=@nomeres, moradaatleta=@moradaatleta, moradares=@moradares, telefoneres=@telefoneres, numsociores=@numsociores, biccres=@biccres, nifres=@nifres, datanascires=@datanascires, email1=@email1, email2=@email2, equipamento=@equipamento, inscricao=@inscricao WHERE idescolas=@idescolas";
+            sql = "UPDATE escolasfutebol SET dataentrada=@dataentrada, reinscricao=@reinscricao, numsocioatleta=@numsocioatleta, examemedico=@examemedico, nomeatleta=@nomeatleta, telefoneatleta=@telefoneatleta, biccatleta=@biccatleta, nifatleta=@nifatleta, datanasciatleta=@datanasciatleta, mensalidade=@mensalidade, nomeres=@nomeres, moradaatleta=@moradaatleta, moradares=@moradares, telefoneres=@telefoneres, numsociores=@numsociores, biccres=@biccres, nifres=@nifres, datanascires=@datanascires, email1=@email1, email2=@email2, equipamento=@equipamento, inscricao=@inscricao, novainscricao=@novainscricao , fotoatleta=@fotoatleta WHERE idescolas=@idescolas";
             cmd = new MySqlCommand(sql, conetar.con);
             cmd.Parameters.AddWithValue("@idescolas", idescolas);
             cmd.Parameters.AddWithValue("@dataentrada", txtDataEntrada.Text);
@@ -374,11 +382,14 @@ namespace SRA
             cmd.Parameters.AddWithValue("@email1", txtEmail1.Text);
             cmd.Parameters.AddWithValue("@email2", txtEmail2.Text);
             cmd.Parameters.AddWithValue("@equipamento", txtEquipamento.Text);
-            cmd.Parameters.AddWithValue(@"inscricao", txtNumInscricao.Text);
+            cmd.Parameters.AddWithValue("@inscricao", txtNumInscricao.Text);
+            cmd.Parameters.AddWithValue("@novainscricao", txtNovaInscricao.Text);
+            cmd.Parameters.AddWithValue("@fotoatleta", image);
             cmd.ExecuteNonQuery();
             conetar.fecharConexao();
             desativarBotoes();
             limparDados();
+            limparFoto();
             desativarCampos();
             btnNovo.Enabled = true;
             btnPesquisar.Enabled = true;
@@ -417,6 +428,19 @@ namespace SRA
             txtEmail2.Text = gridView.CurrentRow.Cells[20].Value.ToString();
             txtEquipamento.Text = gridView.CurrentRow.Cells[21].Value.ToString();
             txtNumInscricao.Text = gridView.CurrentRow.Cells[22].Value.ToString();
+            image.Text = gridView.CurrentRow.Cells[23].Value.ToString();
+            txtNovaInscricao.Text = gridView.CurrentRow.Cells[24].Value.ToString();
+            
+            // pegar a foto
+            if (gridView.CurrentRow.Cells[23].Value != DBNull.Value)
+            {
+                byte[] imagem = (byte[])gridView.Rows[e.RowIndex].Cells[23].Value;
+                MemoryStream ms = new MemoryStream(imagem);
+                image.Image = Image.FromStream(ms);
+            } else
+            {
+                limparFoto();
+            }
         }
 
 
@@ -459,7 +483,10 @@ namespace SRA
         // método limpar foto
         private void limparFoto()
         {
+            image.Image = Properties.Resources.logo;
+            foto = "ft/perfil.png";
 
         }
+
     }
 }
