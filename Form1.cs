@@ -22,6 +22,7 @@ namespace SRA
         MySqlCommand cmd;
         String idescolas;
         String foto;
+        String alterouFoto = "nao";
 
         public frmPrincipal()
         {
@@ -81,8 +82,10 @@ namespace SRA
         private void frmPrincipal_Load(object sender, EventArgs e)
         {
             // carrega tudo ao abrir
-            limparFoto();
+            
             listargridView();
+            limparFoto();
+
         }
 
         private void listargridView()
@@ -111,6 +114,7 @@ namespace SRA
             btnApagar.Enabled = false;
             btnCancelar.Enabled = false;
             btnPesquisar.Enabled = false;
+            btnImg.Enabled = false;
         }
         // metodo para ativar botões
         private void ativarBotoes()
@@ -121,7 +125,7 @@ namespace SRA
             btnApagar.Enabled = true;
             btnCancelar.Enabled = true;
             btnPesquisar.Enabled = true;
-            txtNomeAtleta.Focus();
+            btnImg.Enabled= true;
         }
         // método para limpar os campos
         private void limparDados()
@@ -242,6 +246,7 @@ namespace SRA
             txtPesquisar.Enabled = true;
             btnPesquisar.Enabled = true;
             limparFoto();
+            alterouFoto = "nao";
         }
 
         private void btnGravar_Click(object sender, EventArgs e)
@@ -321,11 +326,9 @@ namespace SRA
             btnNovo.Enabled = true;
             btnPesquisar.Enabled = true;
             txtPesquisar.Enabled = true;
-           
-            MessageBox.Show("Dados gravados com sucesso!","Registo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             limparFoto();
             listargridView();
-            gridView.Enabled = true;
+            MessageBox.Show("Dados gravados com sucesso!", "Registo", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnApagar_Click(object sender, EventArgs e)
@@ -358,91 +361,86 @@ namespace SRA
         {
 
             conetar.abrirConexao();
-            sql = "UPDATE escolasfutebol SET dataentrada=@dataentrada, reinscricao=@reinscricao, numsocioatleta=@numsocioatleta, examemedico=@examemedico, nomeatleta=@nomeatleta, telefoneatleta=@telefoneatleta, biccatleta=@biccatleta, nifatleta=@nifatleta, datanasciatleta=@datanasciatleta, mensalidade=@mensalidade, nomeres=@nomeres, moradaatleta=@moradaatleta, moradares=@moradares, telefoneres=@telefoneres, numsociores=@numsociores, biccres=@biccres, nifres=@nifres, datanascires=@datanascires, email1=@email1, email2=@email2, equipamento=@equipamento, inscricao=@inscricao, novainscricao=@novainscricao , fotoatleta=@fotoatleta WHERE idescolas=@idescolas";
-            cmd = new MySqlCommand(sql, conetar.con);
-            cmd.Parameters.AddWithValue("@idescolas", idescolas);
-            cmd.Parameters.AddWithValue("@dataentrada", txtDataEntrada.Text);
-            cmd.Parameters.AddWithValue("@reinscricao", txtBoxReinscricao.Text);
-            cmd.Parameters.AddWithValue("@numsocioatleta", txtSocioAtleta.Text);
-            cmd.Parameters.AddWithValue("@examemedico", txtExame.Text);
-            cmd.Parameters.AddWithValue("@nomeatleta", txtNomeAtleta.Text);
-            cmd.Parameters.AddWithValue("@telefoneatleta", txtTelAtleta.Text);
-            cmd.Parameters.AddWithValue("@biccatleta", txtBiAtleta.Text);
-            cmd.Parameters.AddWithValue("@nifatleta", txtNifAtleta.Text);
-            cmd.Parameters.AddWithValue("@datanasciatleta", txtNasciAtleta.Text);
-            cmd.Parameters.AddWithValue("@mensalidade", txtMensalidade.Text);
-            cmd.Parameters.AddWithValue("@nomeres", txtNomeRes.Text);
-            cmd.Parameters.AddWithValue("@moradaatleta", txtMoradaAtleta.Text);
-            cmd.Parameters.AddWithValue("@moradares", txtMoradaRes.Text);
-            cmd.Parameters.AddWithValue("@telefoneres", txtTelRes.Text);
-            cmd.Parameters.AddWithValue("@numsociores", txtSocioRes.Text);
-            cmd.Parameters.AddWithValue("@biccres", txtBiRes.Text);
-            cmd.Parameters.AddWithValue("@nifres", txtNifRes.Text);
-            cmd.Parameters.AddWithValue("@datanascires", txtNasciRes.Text);
-            cmd.Parameters.AddWithValue("@email1", txtEmail1.Text);
-            cmd.Parameters.AddWithValue("@email2", txtEmail2.Text);
-            cmd.Parameters.AddWithValue("@equipamento", txtEquipamento.Text);
-            cmd.Parameters.AddWithValue("@inscricao", txtNumInscricao.Text);
-            cmd.Parameters.AddWithValue("@novainscricao", txtNovaInscricao.Text);
-            cmd.Parameters.AddWithValue("@fotoatleta", image);
+
+            if(alterouFoto == "sim")
+
+            {
+                sql = "UPDATE escolasfutebol SET nomeatleta=@nomeatleta, nifatleta=@nifatleta, dataentrada=@dataentrada, numsocioatleta=@numsocioatleta, telefoneatleta=@telefoneatleta, datanasciatleta=@datanasciatleta, biccatleta=@biccatleta, moradaatleta=@moradaatleta, examemedico=@examemedico, reinscricao=@reinscricao, mensalidade=@mensalidade, nomeres=@nomeres, moradares=@moradares, telefoneres=@telefoneres, numsociores=@numsociores, biccres=@biccres, nifres=@nifres, datanascires=@datanascires, email1=@email1, email2=@email2, equipamento=@equipamento, inscricao=@inscricao, fotoatleta=@fotoatleta, novainscricao=@novainscricao  WHERE idescolas=@idescolas";
+                cmd = new MySqlCommand(sql, conetar.con);
+                cmd.Parameters.AddWithValue("@idescolas", idescolas);
+                cmd.Parameters.AddWithValue("@nomeatleta", txtNomeAtleta.Text);
+                cmd.Parameters.AddWithValue("@nifatleta", txtNifAtleta.Text);
+                cmd.Parameters.AddWithValue("@dataentrada", txtDataEntrada.Text);
+                cmd.Parameters.AddWithValue("@numsocioatleta", txtSocioAtleta.Text);
+                cmd.Parameters.AddWithValue("@telefoneatleta", txtTelAtleta.Text);
+                cmd.Parameters.AddWithValue("@datanasciatleta", txtNasciAtleta.Text);
+                cmd.Parameters.AddWithValue("@biccatleta", txtBiAtleta.Text);
+                cmd.Parameters.AddWithValue("@moradaatleta", txtMoradaAtleta.Text);
+                cmd.Parameters.AddWithValue("@examemedico", txtExame.Text);
+                cmd.Parameters.AddWithValue("@reinscricao", txtBoxReinscricao.Text);
+                cmd.Parameters.AddWithValue("@mensalidade", txtMensalidade.Text);
+                cmd.Parameters.AddWithValue("@nomeres", txtNomeRes.Text);
+                cmd.Parameters.AddWithValue("@moradares", txtMoradaRes.Text);
+                cmd.Parameters.AddWithValue("@telefoneres", txtTelRes.Text);
+                cmd.Parameters.AddWithValue("@numsociores", txtSocioRes.Text);
+                cmd.Parameters.AddWithValue("@biccres", txtBiRes.Text);
+                cmd.Parameters.AddWithValue("@nifres", txtNifRes.Text);
+                cmd.Parameters.AddWithValue("@datanascires", txtNasciRes.Text);
+                cmd.Parameters.AddWithValue("@email1", txtEmail1.Text);
+                cmd.Parameters.AddWithValue("@email2", txtEmail2.Text);
+                cmd.Parameters.AddWithValue("@equipamento", txtEquipamento.Text);
+                cmd.Parameters.AddWithValue("@inscricao", txtNumInscricao.Text);
+                cmd.Parameters.AddWithValue("@fotoatleta", img());
+                cmd.Parameters.AddWithValue("@novainscricao", txtNovaInscricao.Text);
+
+            } else if (alterouFoto == "nao")
+            {
+                sql = "UPDATE escolasfutebol SET nomeatleta=@nomeatleta, nifatleta=@nifatleta, dataentrada=@dataentrada, numsocioatleta=@numsocioatleta, telefoneatleta=@telefoneatleta, datanasciatleta=@datanasciatleta, biccatleta=@biccatleta, moradaatleta=@moradaatleta, examemedico=@examemedico, reinscricao=@reinscricao, mensalidade=@mensalidade, nomeres=@nomeres, moradares=@moradares, telefoneres=@telefoneres, numsociores=@numsociores, biccres=@biccres, nifres=@nifres, datanascires=@datanascires, email1=@email1, email2=@email2, equipamento=@equipamento, inscricao=@inscricao, fotoatleta=@fotoatleta, novainscricao=@novainscricao  WHERE idescolas=@idescolas";
+                cmd = new MySqlCommand(sql, conetar.con);
+                cmd.Parameters.AddWithValue("@idescolas", idescolas);
+                cmd.Parameters.AddWithValue("@nomeatleta", txtNomeAtleta.Text);
+                cmd.Parameters.AddWithValue("@nifatleta", txtNifAtleta.Text);
+                cmd.Parameters.AddWithValue("@dataentrada", txtDataEntrada.Text);
+                cmd.Parameters.AddWithValue("@numsocioatleta", txtSocioAtleta.Text);
+                cmd.Parameters.AddWithValue("@telefoneatleta", txtTelAtleta.Text);
+                cmd.Parameters.AddWithValue("@datanasciatleta", txtNasciAtleta.Text);
+                cmd.Parameters.AddWithValue("@biccatleta", txtBiAtleta.Text);
+                cmd.Parameters.AddWithValue("@moradaatleta", txtMoradaAtleta.Text);
+                cmd.Parameters.AddWithValue("@examemedico", txtExame.Text);
+                cmd.Parameters.AddWithValue("@reinscricao", txtBoxReinscricao.Text);
+                cmd.Parameters.AddWithValue("@mensalidade", txtMensalidade.Text);
+                cmd.Parameters.AddWithValue("@nomeres", txtNomeRes.Text);
+                cmd.Parameters.AddWithValue("@moradares", txtMoradaRes.Text);
+                cmd.Parameters.AddWithValue("@telefoneres", txtTelRes.Text);
+                cmd.Parameters.AddWithValue("@numsociores", txtSocioRes.Text);
+                cmd.Parameters.AddWithValue("@biccres", txtBiRes.Text);
+                cmd.Parameters.AddWithValue("@nifres", txtNifRes.Text);
+                cmd.Parameters.AddWithValue("@datanascires", txtNasciRes.Text);
+                cmd.Parameters.AddWithValue("@email1", txtEmail1.Text);
+                cmd.Parameters.AddWithValue("@email2", txtEmail2.Text);
+                cmd.Parameters.AddWithValue("@equipamento", txtEquipamento.Text);
+                cmd.Parameters.AddWithValue("@inscricao", txtNumInscricao.Text);
+                cmd.Parameters.AddWithValue("@fotoatleta", img());
+                cmd.Parameters.AddWithValue("@novainscricao", txtNovaInscricao.Text);
+
+            }
+
             cmd.ExecuteNonQuery();
             conetar.fecharConexao();
-            desativarBotoes();
+
             limparDados();
-            limparFoto();
-            desativarCampos();
-            btnNovo.Enabled = true;
-            btnPesquisar.Enabled = true;
-            MessageBox.Show("Dados editados com sucesso!","Editar", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            listargridView();
-        }
-
-        private void gridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            ativarBotoes();
-            btnNovo.Enabled=false;
-            btnGravar.Enabled=false;
-            ativarCampos();
-            txtPesquisar.Enabled = true;
-            idescolas = gridView.CurrentRow.Cells[0].Value.ToString();
-
-            txtNomeAtleta.Text = gridView.CurrentRow.Cells[1].Value.ToString();
-            txtNifAtleta.Text = gridView.CurrentRow.Cells[2].Value.ToString();
-            txtDataEntrada.Text = gridView.CurrentRow.Cells[3].Value.ToString();
-            txtSocioAtleta.Text = gridView.CurrentRow.Cells[4].Value.ToString();
-            txtTelAtleta.Text = gridView.CurrentRow.Cells[5].Value.ToString();
-            txtNasciAtleta.Text = gridView.CurrentRow.Cells[6].Value.ToString();
-            txtBiAtleta.Text = gridView.CurrentRow.Cells[7].Value.ToString();
-            txtMoradaAtleta.Text = gridView.CurrentRow.Cells[8].Value.ToString();
-            txtExame.Text = gridView.CurrentRow.Cells[9].Value.ToString();
-            txtBoxReinscricao.Text = gridView.CurrentRow.Cells[10].Value.ToString();
-            txtMensalidade.Text = gridView.CurrentRow.Cells[11].Value.ToString();
-            txtNomeRes.Text = gridView.CurrentRow.Cells[12].Value.ToString();
-            txtMoradaRes.Text = gridView.CurrentRow.Cells[13].Value.ToString();
-            txtTelRes.Text = gridView.CurrentRow.Cells[14].Value.ToString();
-            txtSocioRes.Text = gridView.CurrentRow.Cells[15].Value.ToString();
-            txtBiRes.Text = gridView.CurrentRow.Cells[16].Value.ToString();
-            txtNifRes.Text = gridView.CurrentRow.Cells[17].Value.ToString();
-            txtNasciRes.Text = gridView.CurrentRow.Cells[18].Value.ToString();
-            txtEmail1.Text = gridView.CurrentRow.Cells[19].Value.ToString();
-            txtEmail2.Text = gridView.CurrentRow.Cells[20].Value.ToString();
-            txtEquipamento.Text = gridView.CurrentRow.Cells[21].Value.ToString();
-            txtNumInscricao.Text = gridView.CurrentRow.Cells[22].Value.ToString();
-            image.Text = gridView.CurrentRow.Cells[23].Value.ToString();
-            txtNovaInscricao.Text = gridView.CurrentRow.Cells[24].Value.ToString();
             
-            // pegar a foto
-            if (gridView.CurrentRow.Cells[23].Value != DBNull.Value)
-            {
-                byte[] imagem = (byte[])gridView.Rows[e.RowIndex].Cells[23].Value;
-                MemoryStream ms = new MemoryStream(imagem);
-                image.Image = Image.FromStream(ms);
-            } else
-            {
-                limparFoto();
-            }
-        }
+            desativarCampos();
+            desativarBotoes();
+            btnNovo.Enabled = true;
 
+            listargridView();
+            limparFoto();
+
+            MessageBox.Show("Dados editados com sucesso!", "Editar registo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+        }
 
 
         private void txtPesquisar_TextChanged(object sender, EventArgs e)
@@ -457,6 +455,7 @@ namespace SRA
 
         private void btnImg_Click(object sender, EventArgs e)
         {
+            alterouFoto = "sim";
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "Fotos(*.jpg; *.jpeg; *.png) | *.jpg; *.jpeg; *.png;"; // carregar os tipos de ficheiro
             if (dialog.ShowDialog() == DialogResult.OK)
@@ -464,6 +463,11 @@ namespace SRA
                 // pega o caminho da imagen selecionada e joga no imgage
                 foto = dialog.FileName.ToString();
                 image.ImageLocation = foto;
+                alterouFoto = "sim";
+            }
+            else
+            {
+                MessageBox.Show("Não alterou a foto");
             }
         }
 
@@ -483,10 +487,65 @@ namespace SRA
         // método limpar foto
         private void limparFoto()
         {
-            image.Image = Properties.Resources.logo;
+            image.Image = Properties.Resources.perfil;
             foto = "ft/perfil.png";
 
         }
 
+        private void gridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex > -1)
+            {
+                limparFoto();
+
+                ativarBotoes();
+                btnNovo.Enabled = false;
+                btnGravar.Enabled = false;
+                ativarCampos();
+
+                idescolas = gridView.CurrentRow.Cells[0].Value.ToString();
+                txtNomeAtleta.Text = gridView.CurrentRow.Cells[1].Value.ToString();
+                txtNifAtleta.Text = gridView.CurrentRow.Cells[2].Value.ToString();
+                txtDataEntrada.Text = gridView.CurrentRow.Cells[3].Value.ToString();
+                txtSocioAtleta.Text = gridView.CurrentRow.Cells[4].Value.ToString();
+                txtTelAtleta.Text = gridView.CurrentRow.Cells[5].Value.ToString();
+                txtNasciAtleta.Text = gridView.CurrentRow.Cells[6].Value.ToString();
+                txtBiAtleta.Text = gridView.CurrentRow.Cells[7].Value.ToString();
+                txtMoradaAtleta.Text = gridView.CurrentRow.Cells[8].Value.ToString();
+                txtExame.Text = gridView.CurrentRow.Cells[9].Value.ToString();
+                txtBoxReinscricao.Text = gridView.CurrentRow.Cells[10].Value.ToString();
+                txtMensalidade.Text = gridView.CurrentRow.Cells[11].Value.ToString();
+                txtNomeRes.Text = gridView.CurrentRow.Cells[12].Value.ToString();
+                txtMoradaRes.Text = gridView.CurrentRow.Cells[13].Value.ToString();
+                txtTelRes.Text = gridView.CurrentRow.Cells[14].Value.ToString();
+                txtSocioRes.Text = gridView.CurrentRow.Cells[15].Value.ToString();
+                txtBiRes.Text = gridView.CurrentRow.Cells[16].Value.ToString();
+                txtNifRes.Text = gridView.CurrentRow.Cells[17].Value.ToString();
+                txtNasciRes.Text = gridView.CurrentRow.Cells[18].Value.ToString();
+                txtEmail1.Text = gridView.CurrentRow.Cells[19].Value.ToString();
+                txtEmail2.Text = gridView.CurrentRow.Cells[20].Value.ToString();
+                txtEquipamento.Text = gridView.CurrentRow.Cells[21].Value.ToString();
+                txtNumInscricao.Text = gridView.CurrentRow.Cells[22].Value.ToString();
+                //image.Text = gridView.CurrentRow.Cells[23].Value.ToString();
+                txtNovaInscricao.Text = gridView.CurrentRow.Cells[24].Value.ToString();
+
+
+                // pegar a foto
+                if (gridView.CurrentRow.Cells[23].Value != DBNull.Value)
+                {
+                    byte[] imagem = (byte[])gridView.Rows[e.RowIndex].Cells[23].Value;
+                    MemoryStream ms = new MemoryStream(imagem);
+                    image.Image = Image.FromStream(ms);
+                }
+                else
+                {
+                    image.Image = Properties.Resources.perfil;
+                }
+            }
+            else
+            {
+                return;
+            }
+        }
     }
 }

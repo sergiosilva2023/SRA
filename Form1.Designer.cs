@@ -657,7 +657,7 @@
             this.gridView.ReadOnly = true;
             this.gridView.Size = new System.Drawing.Size(745, 92);
             this.gridView.TabIndex = 30;
-            this.gridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridView_CellContentClick);
+            this.gridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridView_CellClick);
             // 
             // txtPesquisar
             // 
@@ -690,6 +690,7 @@
             // 
             // btnImg
             // 
+            this.btnImg.Enabled = false;
             this.btnImg.Font = new System.Drawing.Font("Candara", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnImg.Location = new System.Drawing.Point(17, 345);
             this.btnImg.Name = "btnImg";
@@ -727,6 +728,7 @@
             // 
             this.image.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.image.ErrorImage = null;
+            this.image.Image = global::SRA.Properties.Resources.perfil;
             this.image.Location = new System.Drawing.Point(18, 196);
             this.image.Name = "image";
             this.image.Size = new System.Drawing.Size(112, 133);
@@ -736,6 +738,7 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Image = global::SRA.Properties.Resources.logo;
             this.pictureBox1.Location = new System.Drawing.Point(87, 49);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
