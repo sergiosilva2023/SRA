@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.IO;
 using System.Diagnostics;
+using System.Data.Common;
 
 namespace SRA
 {
@@ -22,7 +23,8 @@ namespace SRA
         MySqlCommand cmd;
         String idescolas;
         String foto;
-        String alterouFoto = "nao";
+        String alterouFoto = "Não";
+        String nifRegistado;
 
         public frmPrincipal()
         {
@@ -288,6 +290,27 @@ namespace SRA
                 txtDataEntrada.Focus();
                 return;
             }
+            if (txtTelAtleta.Text.Trim() == "")
+            {
+                MessageBox.Show("Digite número de telefone do atleta");
+                txtTelAtleta.Text = "";
+                txtTelAtleta.Focus();
+                return;
+            }
+            if (txtNasciAtleta.Text.Trim() == "")
+            {
+                MessageBox.Show("Digite data nascimento do atleta");
+                txtNasciAtleta.Text = "";
+                txtNasciAtleta.Focus();
+                return;
+            }
+            if (txtNumInscricao.Text.Trim() == "")
+            {
+                MessageBox.Show("Digite o número de inscrição");
+                txtNumInscricao.Text = "";
+                txtNumInscricao.Focus();
+                return;
+            }
 
             // inserir dados na tabela
             conetar.abrirConexao();
@@ -317,6 +340,53 @@ namespace SRA
             cmd.Parameters.AddWithValue("@inscricao", txtNumInscricao.Text);
             cmd.Parameters.AddWithValue("@fotoatleta", img()); // método img()
             cmd.Parameters.AddWithValue("@novainscricao", txtNovaInscricao.Text);
+
+            // verificar o contribuinte do atleta e número de inscrição
+            MySqlCommand cmdVerificarNif;
+            MySqlCommand cmdVerificarInscricao;
+            cmdVerificarNif = new MySqlCommand("SELECT * FROM escolasfutebol WHERE nifatleta=@nifatleta", conetar.con);
+            cmdVerificarInscricao = new MySqlCommand("SELECT * FROM escolasfutebol WHERE inscricao=@inscricao", conetar.con);
+            MySqlDataAdapter da = new MySqlDataAdapter();
+            MySqlDataAdapter daa = new MySqlDataAdapter();
+            da.SelectCommand = cmdVerificarNif;
+            daa.SelectCommand = cmdVerificarInscricao;
+            cmdVerificarNif.Parameters.AddWithValue("@nifatleta", txtNifAtleta.Text);
+            cmdVerificarInscricao.Parameters.AddWithValue("@inscricao", txtNumInscricao.Text);
+            DataTable dt = new DataTable();
+            DataTable dtt = new DataTable();
+            da.Fill(dt);
+            daa.Fill(dtt);
+            if ( dt.Rows.Count >0)
+            {
+                MessageBox.Show("NIF de atleta já existe!", "Registo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                txtNifAtleta.Text = "";
+                txtNifAtleta.Focus();
+                return;
+
+            }
+            if (dtt.Rows.Count >0)
+            {
+                MessageBox.Show("Número de inscrição já existe!", "Registo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                txtNumInscricao.Text = "";
+                txtNumInscricao.Focus();
+                return;
+            }
+            // verifica o número de inscricao
+            //MySqlCommand cmdVerificarInscricao;
+            //cmdVerificarInscricao = new MySqlCommand("SELECT * FROM escolasfutebol WHERE inscricao=@inscricao", conetar.con);
+            //MySqlDataAdapter daa = new MySqlDataAdapter();
+            //daa.SelectCommand = cmdVerificarInscricao;
+            //cmdVerificarInscricao.Parameters.AddWithValue("@inscricao", txtNumInscricao.Text);
+            //DataTable dtt = new DataTable();
+            //daa.Fill(dtt);
+            //if (dt.Rows.Count > 0)
+            //{
+            //    MessageBox.Show("Inscrição de atleta já existe!", "Registo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            //    txtNumInscricao.Text = "";
+            //    txtNumInscricao.Focus();
+
+            //    return;
+            //}
 
             cmd.ExecuteNonQuery();
             conetar.fecharConexao();
@@ -362,7 +432,7 @@ namespace SRA
 
             conetar.abrirConexao();
 
-            if(alterouFoto == "sim")
+            if(alterouFoto == "Sim")
 
             {
                 sql = "UPDATE escolasfutebol SET nomeatleta=@nomeatleta, nifatleta=@nifatleta, dataentrada=@dataentrada, numsocioatleta=@numsocioatleta, telefoneatleta=@telefoneatleta, datanasciatleta=@datanasciatleta, biccatleta=@biccatleta, moradaatleta=@moradaatleta, examemedico=@examemedico, reinscricao=@reinscricao, mensalidade=@mensalidade, nomeres=@nomeres, moradares=@moradares, telefoneres=@telefoneres, numsociores=@numsociores, biccres=@biccres, nifres=@nifres, datanascires=@datanascires, email1=@email1, email2=@email2, equipamento=@equipamento, inscricao=@inscricao, fotoatleta=@fotoatleta, novainscricao=@novainscricao  WHERE idescolas=@idescolas";
@@ -393,9 +463,9 @@ namespace SRA
                 cmd.Parameters.AddWithValue("@fotoatleta", img());
                 cmd.Parameters.AddWithValue("@novainscricao", txtNovaInscricao.Text);
 
-            } else if (alterouFoto == "nao")
+            } else if (alterouFoto == "Não")
             {
-                sql = "UPDATE escolasfutebol SET nomeatleta=@nomeatleta, nifatleta=@nifatleta, dataentrada=@dataentrada, numsocioatleta=@numsocioatleta, telefoneatleta=@telefoneatleta, datanasciatleta=@datanasciatleta, biccatleta=@biccatleta, moradaatleta=@moradaatleta, examemedico=@examemedico, reinscricao=@reinscricao, mensalidade=@mensalidade, nomeres=@nomeres, moradares=@moradares, telefoneres=@telefoneres, numsociores=@numsociores, biccres=@biccres, nifres=@nifres, datanascires=@datanascires, email1=@email1, email2=@email2, equipamento=@equipamento, inscricao=@inscricao, fotoatleta=@fotoatleta, novainscricao=@novainscricao  WHERE idescolas=@idescolas";
+                sql = "UPDATE escolasfutebol SET nomeatleta=@nomeatleta, nifatleta=@nifatleta, dataentrada=@dataentrada, numsocioatleta=@numsocioatleta, telefoneatleta=@telefoneatleta, datanasciatleta=@datanasciatleta, biccatleta=@biccatleta, moradaatleta=@moradaatleta, examemedico=@examemedico, reinscricao=@reinscricao, mensalidade=@mensalidade, nomeres=@nomeres, moradares=@moradares, telefoneres=@telefoneres, numsociores=@numsociores, biccres=@biccres, nifres=@nifres, datanascires=@datanascires, email1=@email1, email2=@email2, equipamento=@equipamento, inscricao=@inscricao, novainscricao=@novainscricao  WHERE idescolas=@idescolas";
                 cmd = new MySqlCommand(sql, conetar.con);
                 cmd.Parameters.AddWithValue("@idescolas", idescolas);
                 cmd.Parameters.AddWithValue("@nomeatleta", txtNomeAtleta.Text);
@@ -422,6 +492,29 @@ namespace SRA
                 cmd.Parameters.AddWithValue("@inscricao", txtNumInscricao.Text);
                 cmd.Parameters.AddWithValue("@fotoatleta", img());
                 cmd.Parameters.AddWithValue("@novainscricao", txtNovaInscricao.Text);
+
+                
+            }
+            
+
+            if (txtNifAtleta.Text != nifRegistado)
+            {
+
+                MySqlCommand cmdVerificar;
+                cmdVerificar = new MySqlCommand("SELECT * FROM escolasfutebol WHERE nifatleta=@nifatleta", conetar.con);
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                da.SelectCommand = cmdVerificar;
+                cmdVerificar.Parameters.AddWithValue("@nifatleta", txtNifAtleta.Text);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                if (dt.Rows.Count > 0)
+                {
+                    MessageBox.Show("NIF de atleta já existe!", "Registo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    txtNifAtleta.Text = "";
+                    txtNifAtleta.Focus();
+
+                    return;
+                }
 
             }
 
@@ -455,7 +548,7 @@ namespace SRA
 
         private void btnImg_Click(object sender, EventArgs e)
         {
-            alterouFoto = "sim";
+            alterouFoto = "Sim";
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "Fotos(*.jpg; *.jpeg; *.png) | *.jpg; *.jpeg; *.png;"; // carregar os tipos de ficheiro
             if (dialog.ShowDialog() == DialogResult.OK)
@@ -463,11 +556,13 @@ namespace SRA
                 // pega o caminho da imagen selecionada e joga no imgage
                 foto = dialog.FileName.ToString();
                 image.ImageLocation = foto;
-                alterouFoto = "sim";
+                alterouFoto = "Sim";
+                //MessageBox.Show("" + alterouFoto);
             }
             else
             {
-                MessageBox.Show("Não alterou a foto");
+                alterouFoto = "Não";
+                //MessageBox.Show("" + alterouFoto);
             }
         }
 
@@ -503,6 +598,8 @@ namespace SRA
                 btnGravar.Enabled = false;
                 ativarCampos();
 
+                alterouFoto = "Não";
+
                 idescolas = gridView.CurrentRow.Cells[0].Value.ToString();
                 txtNomeAtleta.Text = gridView.CurrentRow.Cells[1].Value.ToString();
                 txtNifAtleta.Text = gridView.CurrentRow.Cells[2].Value.ToString();
@@ -526,8 +623,10 @@ namespace SRA
                 txtEmail2.Text = gridView.CurrentRow.Cells[20].Value.ToString();
                 txtEquipamento.Text = gridView.CurrentRow.Cells[21].Value.ToString();
                 txtNumInscricao.Text = gridView.CurrentRow.Cells[22].Value.ToString();
-                //image.Text = gridView.CurrentRow.Cells[23].Value.ToString();
+                image.Text = gridView.CurrentRow.Cells[23].Value.ToString();
                 txtNovaInscricao.Text = gridView.CurrentRow.Cells[24].Value.ToString();
+
+                nifRegistado = gridView.CurrentRow.Cells[2].Value.ToString();
 
 
                 // pegar a foto
@@ -547,5 +646,6 @@ namespace SRA
                 return;
             }
         }
+
     }
 }

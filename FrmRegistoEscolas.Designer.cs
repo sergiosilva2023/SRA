@@ -436,7 +436,6 @@
             // 
             // btnGravar
             // 
-            this.btnGravar.Enabled = false;
             this.btnGravar.Font = new System.Drawing.Font("Candara", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGravar.Location = new System.Drawing.Point(17, 403);
             this.btnGravar.Name = "btnGravar";
@@ -696,7 +695,7 @@
             this.btnImg.Name = "btnImg";
             this.btnImg.Size = new System.Drawing.Size(112, 23);
             this.btnImg.TabIndex = 30;
-            this.btnImg.Text = "Editar foto";
+            this.btnImg.Text = "Foto";
             this.btnImg.UseVisualStyleBackColor = true;
             this.btnImg.Click += new System.EventHandler(this.btnImg_Click);
             // 
@@ -820,8 +819,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Principal";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Text = "Registo de Ecolas Futebol";
             this.Load += new System.EventHandler(this.frmPrincipal_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.image)).EndInit();
